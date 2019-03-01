@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="30dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact Us"
+            android:textSize="28dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorAccent"/>
+
+        <EditText
+            android:id="@+id/editText_contact_firstname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="24dp"
+            android:hint="First Name*"/>
+
+        <EditText
+            android:id="@+id/editText_contact_lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:hint="Last Name"/>
+
+        <EditText
+            android:id="@+id/editText_contact_emailaddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:hint="Email Address*"/>
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/spinner_contact_nationality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintText="Nationality*"
+            android:tooltipText="Select Country"
+            android:layout_marginVertical="10dp"/>
+
+        <EditText
+            android:id="@+id/editText_contact_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:hint="Message*"/>
+
+        <Button
+            android:id="@+id/button_contact_singup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sing Up"
+            android:enabled="false"
+            android:textSize="24dp"
+            android:layout_marginTop="20dp" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

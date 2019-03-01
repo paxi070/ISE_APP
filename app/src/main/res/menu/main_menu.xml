@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_menu_about"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_staff"
+            android:icon="@drawable/ic_menu_staff"
+            android:title="Staff" />
+
+        <item
+            android:id="@+id/nav_attendance"
+            android:icon="@drawable/ic_menu_attendance"
+            android:title="Attendance" />
+
+        <item
+            android:id="@+id/nav_courses"
+            android:icon="@drawable/ic_menu_programmes"
+            android:title="Courses" />
+
+        <item
+            android:id="@+id/nav_resquestform"
+            android:icon="@drawable/ic_menu_requestform"
+            android:title="Request Form" />
+
+        <item
+            android:id="@+id/nav_isesocial"
+            android:icon="@drawable/ic_menu_social"
+            android:title="ISE Social" />
+
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_menu_contact"
+            android:title="Contact" />
+
+         ////////////////////////////////////////////////////////////////////// -->
+
+        <!--<item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_person"
+            android:title="Profile" />
+
+        <item
+            android:id="@+id/nav_programmes"
+            android:icon="@drawable/ic_menu_programmes"
+            android:title="Programmes" />
+
+        <item
+            android:id="@+id/nav_accommodation"
+            android:icon="@drawable/ic_menu_accommodation1"
+            android:title="Accomodation" />
+
+        <item
+            android:id="@+id/nav_book"
+            android:icon="@drawable/ic_menu_book"
+            android:title="Book Now" />
+
+        <item
+            android:id="@+id/nav_information"
+            android:icon="@drawable/ic_menu_info"
+            android:title="Information" />-->
+
+    </group>
+
+</menu>
