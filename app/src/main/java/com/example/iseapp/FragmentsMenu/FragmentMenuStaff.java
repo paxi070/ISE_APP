@@ -1,5 +1,7 @@
 package com.example.iseapp.FragmentsMenu;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -44,9 +49,9 @@ public class FragmentMenuStaff extends Fragment
         rq = Volley.newRequestQueue(getContext());
 
         mList = view.findViewById(R.id.recyclerview_staff);
-
         staffList = new ArrayList<>();
-        adapter = new StaffAdapter(getContext(), staffList);
+
+        adapter = new StaffAdapter(getContext(), staffList, getActivity());
 
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
