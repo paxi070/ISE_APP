@@ -13,8 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.example.iseapp.FragmentsMenu.FragmentMenuAttendance;
 import com.example.iseapp.FragmentsMenu.FragmentMenuContact;
 import com.example.iseapp.FragmentsMenu.FragmentMenuCourses;
+import com.example.iseapp.FragmentsMenu.FragmentMenuNews;
 import com.example.iseapp.FragmentsMenu.FragmentMenuStaff;
 import com.example.iseapp.FragmentsMenu.FragmentRequestForm;
 
@@ -90,7 +93,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (id == R.id.nav_courses)
+        if (id == R.id.nav_about)
+        {
+            fragmentManager.beginTransaction().replace(
+                    R.id.contenedor, new FragmentMenuNews()).commit();
+        }
+
+        if (id == R.id.nav_attendance)
+        {
+            fragmentManager.beginTransaction().replace(
+                    R.id.contenedor, new FragmentMenuAttendance()).commit();
+        }
+
+        else if (id == R.id.nav_courses)
         {
             fragmentManager.beginTransaction().replace(
                     R.id.contenedor, new FragmentMenuCourses()).commit();

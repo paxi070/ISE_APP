@@ -1,4 +1,6 @@
 package com.example.iseapp.Recyclers;
 
-public class SocialAdapter {
+public class SocialAdapter
+{
+
 }
