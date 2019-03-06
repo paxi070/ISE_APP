@@ -23,7 +23,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView_news_photo"
-                android:maxLines="3"
                 android:padding="8dp"
                 android:textColor="#222"
                 android:textStyle="bold"

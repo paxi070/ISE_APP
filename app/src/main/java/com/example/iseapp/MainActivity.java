@@ -18,6 +18,7 @@ import com.example.iseapp.FragmentsMenu.FragmentMenuAttendance;
 import com.example.iseapp.FragmentsMenu.FragmentMenuContact;
 import com.example.iseapp.FragmentsMenu.FragmentMenuCourses;
 import com.example.iseapp.FragmentsMenu.FragmentMenuNews;
+import com.example.iseapp.FragmentsMenu.FragmentMenuSocial;
 import com.example.iseapp.FragmentsMenu.FragmentMenuStaff;
 import com.example.iseapp.FragmentsMenu.FragmentRequestForm;
 
@@ -115,6 +116,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             fragmentManager.beginTransaction().replace(
                     R.id.contenedor, new FragmentRequestForm()).commit();
+        }
+
+        else if (id == R.id.nav_isesocial)
+        {
+            fragmentManager.beginTransaction().replace(
+                    R.id.contenedor, new FragmentMenuSocial()).commit();
         }
 
         else if (id == R.id.nav_contact)
