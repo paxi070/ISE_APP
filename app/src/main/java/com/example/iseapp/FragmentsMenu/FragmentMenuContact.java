@@ -1,11 +1,14 @@
 package com.example.iseapp.FragmentsMenu;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +16,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.iseapp.R;
+import com.example.iseapp.ToastCustomized;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
@@ -28,11 +35,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FragmentMenuContact extends Fragment
 {
-    EditText editText_FirstName, editText_LastName, editText_emailAddress, editText_message;
-    SearchableSpinner spinner_nationality;
+    public static EditText editText_FirstName, editText_LastName, editText_emailAddress, editText_message;
+    public static SearchableSpinner spinner_nationality;
     Button button_signup;
 
     @Override
@@ -150,6 +159,10 @@ public class FragmentMenuContact extends Fragment
             }
         });
 
+        //endregion
+
+        //region Click
+
         button_signup.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -157,6 +170,29 @@ public class FragmentMenuContact extends Fragment
             {
                 //Validar Email
                 //Enviar Datos
+
+                if(editText_FirstName.getText().toString().trim().length() == 0)
+                {
+                    editText_FirstName.setError("");
+                }
+                else if(editText_emailAddress.getText().toString().trim().length() == 0)
+                {
+                    editText_emailAddress.setError("");
+                }
+                else if (!editText_emailAddress.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
+                {
+                    editText_emailAddress.setError("");
+                }
+                else if(editText_message.getText().toString().trim().length() == 0)
+                {
+                    editText_message.setError("");
+                }
+                else
+                {
+                    postNewComment(getContext());
+
+                    new ToastCustomized().setInfoToast(getLayoutInflater(), getContext(), "Send");
+                }
             }
         });
 
@@ -167,7 +203,7 @@ public class FragmentMenuContact extends Fragment
         return view;
     }
 
-    //region APIgetData
+    //region API_GET_DATA
 
     public void getData()
     {
@@ -229,6 +265,65 @@ public class FragmentMenuContact extends Fragment
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(jsonObjectRequest);
+    }
+
+    //endregion
+
+    //region API_POST_DATA
+
+    public static void postNewComment(Context context)
+    {
+        //mPostCommentResponse.requestStarted();
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        StringRequest sr = new StringRequest(Request.Method.POST,"http://iseireland.ie/api/doc/#/attendance/saveEnquiry", new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+                //mPostCommentResponse.requestCompleted();
+            }
+        }, new Response.ErrorListener()
+        {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                //mPostCommentResponse.requestEndedWithError(error);
+            }
+        })
+        {
+            @Override
+            protected Map<String,String> getParams()
+            {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("firstName", editText_FirstName.getText().toString());
+
+                if(editText_LastName.getText().toString().trim().length() == 0)
+                {
+                    params.put("lastName", "");
+                }
+                else
+                {
+                    params.put("lastName", editText_LastName.getText().toString());
+                }
+
+                params.put("email", editText_emailAddress.getText().toString());
+                params.put("nationality", spinner_nationality.getSelectedItem().toString());
+                params.put("message", editText_message.getText().toString());
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+
+        queue.add(sr);
     }
 
     //endregion

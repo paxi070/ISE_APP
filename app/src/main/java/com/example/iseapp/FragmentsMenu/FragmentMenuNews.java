@@ -32,6 +32,8 @@ import java.util.List;
 
 public class FragmentMenuNews extends Fragment
 {
+    private static final String url = "http://iseireland.ie/api/v1/news/all";
+
     private RecyclerView mList;
 
     private LinearLayoutManager linearLayoutManager;
@@ -40,7 +42,7 @@ public class FragmentMenuNews extends Fragment
     private RecyclerView.Adapter adapter;
 
     RequestQueue rq;
-    String url = "http://iseireland.ie/api/v1/news/all";
+    //String url = "http://iseireland.ie/api/v1/news/all";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
