@@ -271,17 +271,18 @@ public class FragmentMenuContact extends Fragment
 
     //region API_POST_DATA
 
-    public static void postNewComment(Context context)
+    public static void postNewComment(final Context context)
     {
         //mPostCommentResponse.requestStarted();
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        StringRequest sr = new StringRequest(Request.Method.POST,"http://iseireland.ie/api/doc/#/attendance/saveEnquiry", new Response.Listener<String>()
+        StringRequest sr = new StringRequest(Request.Method.POST,"https://iseireland.ie/api/v1/enquiry/save", new Response.Listener<String>()
         {
             @Override
             public void onResponse(String response)
             {
                 //mPostCommentResponse.requestCompleted();
+                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener()
         {
