@@ -1,7 +1,9 @@
 package com.example.iseapp.FragmentsMenu;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -168,30 +170,46 @@ public class FragmentMenuContact extends Fragment
             @Override
             public void onClick(View v)
             {
-                //Validar Email
-                //Enviar Datos
-
                 if(editText_FirstName.getText().toString().trim().length() == 0)
                 {
-                    editText_FirstName.setError("");
+                    editText_FirstName.setError("This field can't be empty");
                 }
                 else if(editText_emailAddress.getText().toString().trim().length() == 0)
                 {
-                    editText_emailAddress.setError("");
+                    editText_emailAddress.setError("This field can't be empty");
                 }
                 else if (!editText_emailAddress.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
                 {
-                    editText_emailAddress.setError("");
+                    editText_emailAddress.setError("This email is not valid");
                 }
                 else if(editText_message.getText().toString().trim().length() == 0)
                 {
-                    editText_message.setError("");
+                    editText_message.setError("This field can't be empty");
                 }
                 else
                 {
-                    postNewComment(getContext());
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            switch (which)
+                            {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    postNewComment(getContext(), getLayoutInflater());
+                                    break;
 
-                    new ToastCustomized().setInfoToast(getLayoutInflater(), getContext(), "Send");
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    clearForm();
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage("Are you sure you want to post this enquiry?").setPositiveButton("Yes", dialogClickListener)
+                            .setNegativeButton("No", dialogClickListener).show();
+
                 }
             }
         });
@@ -271,7 +289,7 @@ public class FragmentMenuContact extends Fragment
 
     //region API_POST_DATA
 
-    public static void postNewComment(final Context context)
+    public static void postNewComment(final Context context, final LayoutInflater layoutInflater)
     {
         //mPostCommentResponse.requestStarted();
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -281,8 +299,12 @@ public class FragmentMenuContact extends Fragment
             @Override
             public void onResponse(String response)
             {
+                new ToastCustomized().setInfoToast(layoutInflater, context,
+                        "Thank you for your enquiry. We'll get back to you soon as possible");
+
+                clearForm();
+
                 //mPostCommentResponse.requestCompleted();
-                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener()
         {
@@ -328,4 +350,12 @@ public class FragmentMenuContact extends Fragment
     }
 
     //endregion
+
+    public static void clearForm()
+    {
+        editText_FirstName.setText("");
+        editText_LastName.setText("");
+        editText_emailAddress.setText("");
+        editText_message.setText("");
+    }
 }

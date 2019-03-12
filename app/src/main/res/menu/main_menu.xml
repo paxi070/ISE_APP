@@ -36,6 +36,11 @@
             android:title="Request Form" />
 
         <item
+            android:id="@+id/nav_newsletter"
+            android:icon="@drawable/ic_menu_newsletter"
+            android:title="News Letter" />
+
+        <item
             android:id="@+id/nav_contact"
             android:icon="@drawable/ic_menu_contact"
             android:title="Contact" />

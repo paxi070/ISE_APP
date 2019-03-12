@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Your Name*"
                 android:layout_marginTop="10dp"
+                android:singleLine="true"
                 android:textSize="24dp"/>
 
             <EditText
@@ -37,6 +38,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Student ID*"
+                android:singleLine="true"
+                android:maxLength="4"
+                android:inputType="number"
                 android:textSize="24dp"/>
 
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -47,11 +51,11 @@
                 android:tooltipText="Select Country"
                 android:layout_marginVertical="10dp"/>
 
-
             <EditText
                 android:id="@+id/editText_requestform_passportnumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:hint="Passport Number*"
                 android:textSize="24dp"/>
 
@@ -59,6 +63,7 @@
                 android:id="@+id/editText_requestform_birthdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_request_calendar"
                 android:hint="Birth Date"
                 android:textSize="24dp"/>
 
@@ -66,6 +71,8 @@
                 android:id="@+id/editText_requestform_phonenumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
+                android:singleLine="true"
                 android:hint="Phone Number*"
                 android:textSize="24dp"/>
 
@@ -81,6 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Student Home Address*"
+                android:singleLine="true"
                 android:textSize="24dp"/>
 
             <EditText
@@ -88,6 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Course Start Date"
+                android:drawableRight="@drawable/ic_request_calendar"
                 android:textSize="24dp"/>
 
             <EditText
@@ -95,14 +104,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Course End Date"
+                android:drawableRight="@drawable/ic_request_calendar"
                 android:textSize="24dp"/>
 
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/spinner_requestform_request"
+            <com.thomashaertel.widget.MultiSpinner
+                android:id="@+id/spinnerMulti"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintText="Request*"
-                android:tooltipText="Select Country"
+                android:textSize="24dp"
                 android:layout_marginVertical="10dp"/>
 
             <EditText
@@ -118,7 +127,6 @@
                 android:layout_height="wrap_content"
                 android:text="Sumbit"
                 android:layout_marginTop="10dp"
-                android:enabled="false"
                 android:textSize="24dp"/>
 
         </LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="string_array_request">
+        <item>Insurance</item>
+        <item>Bank Letter</item>
+        <item>Visa Extension</item>
+        <item>Reference Letter</item>
+        <item>Attendance Letter</item>
+        <item>Exit Letter</item>
+        <item>Return to Class</item>
+        <item>Holiday*</item>
+        <item>Attendance Queries</item>
+        <item>Refund</item>
+        <item>Learner Protection</item>
+        <item>Appeal Against Expulsion</item>
+    </string-array>
+</resources>

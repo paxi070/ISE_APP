@@ -18,6 +18,7 @@ import com.example.iseapp.FragmentsMenu.FragmentMenuAttendance;
 import com.example.iseapp.FragmentsMenu.FragmentMenuContact;
 import com.example.iseapp.FragmentsMenu.FragmentMenuCourses;
 import com.example.iseapp.FragmentsMenu.FragmentMenuNews;
+import com.example.iseapp.FragmentsMenu.FragmentMenuNewsLetter;
 import com.example.iseapp.FragmentsMenu.FragmentMenuSocial;
 import com.example.iseapp.FragmentsMenu.FragmentMenuStaff;
 import com.example.iseapp.FragmentsMenu.FragmentRequestForm;
@@ -138,6 +139,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             fragmentManager.beginTransaction().replace(
                     R.id.contenedor, new FragmentMenuStaff()).commit();
+        }
+
+        else if (id == R.id.nav_newsletter)
+        {
+            fragmentManager.beginTransaction().replace(
+                    R.id.contenedor, new FragmentMenuNewsLetter()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

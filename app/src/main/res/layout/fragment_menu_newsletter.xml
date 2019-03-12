@@ -14,60 +14,34 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Contact Us"
+            android:text="NEWS LETTER"
             android:textSize="28dp"
             android:gravity="center"
             android:textStyle="bold"
-            android:singleLine="true"
             android:layout_marginTop="20dp"
             android:textColor="@color/colorAccent"/>
 
         <EditText
-            android:id="@+id/editText_contact_firstname"
+            android:id="@+id/editText_newsletter_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:textSize="24dp"
             android:singleLine="true"
-            android:hint="First Name*"/>
+            android:hint="Name*"/>
 
         <EditText
-            android:id="@+id/editText_contact_lastname"
+            android:id="@+id/editText_newsletter_emailaddres"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24dp"
             android:singleLine="true"
-            android:hint="Last Name"/>
-
-        <EditText
-            android:id="@+id/editText_contact_emailaddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24dp"
-            android:singleLine="true"
-            android:hint="Email Address*"/>
-
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-            android:id="@+id/spinner_contact_nationality"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintText="Nationality*"
-            android:tooltipText="Select Country"
-            android:layout_marginVertical="10dp"/>
-
-        <EditText
-            android:id="@+id/editText_contact_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24dp"
-            android:singleLine="true"
-            android:hint="Message*"/>
+            android:hint="Email Addres*"/>
 
         <Button
-            android:id="@+id/button_contact_singup"
+            android:id="@+id/button_newsletter_subscribe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sing Up"
+            android:text="Subscribe"
             android:enabled="false"
             android:textSize="24dp"
             android:layout_marginTop="20dp" />
