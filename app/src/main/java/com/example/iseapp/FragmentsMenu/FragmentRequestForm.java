@@ -46,7 +46,7 @@ public class FragmentRequestForm extends Fragment
 {
     private MultiSpinner spinner;
     private ArrayAdapter<String> adapter;
-    private ArrayList<String> requestAux;
+    private static ArrayList<String> requestAux;
 
     static EditText editText_requestform_name,
             editText_requestform_studentid,
@@ -66,6 +66,8 @@ public class FragmentRequestForm extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        requestAux = new ArrayList<>();
+
         final DatePickerDialog datePickerDialogBirth = new DatePickerDialog(getContext());
         final DatePickerDialog datePickerDialogStart = new DatePickerDialog(getContext());
         final DatePickerDialog datePickerDialogEnd = new DatePickerDialog(getContext());
@@ -104,9 +106,11 @@ public class FragmentRequestForm extends Fragment
         spinner = (MultiSpinner) view.findViewById(R.id.spinnerMulti);
         spinner.setAdapter(adapter, false, onSelectedListener);
 
-        boolean[] selectedItems = new boolean[adapter.getCount()];
+
+        /*boolean[] selectedItems = new boolean[adapter.getCount()];
         selectedItems[1] = true; // select second item
-        spinner.setSelected(selectedItems);
+        spinner.setSelected(selectedItems);*/
+
 
         editText_requestform_birthdate.setInputType(InputType.TYPE_NULL);
         editText_requestform_coursestartdate.setInputType(InputType.TYPE_NULL);
@@ -424,8 +428,63 @@ public class FragmentRequestForm extends Fragment
             @Override
             public void onClick(View v)
             {
+                try
+                {
+                    if(editText_requestform_name.getText().toString().trim().length() == 0)
+                    {
+                        editText_requestform_name.setError("This field can't be empty");
+                    }
 
+                    if(editText_requestform_studentid.getText().toString().trim().length() == 0)
+                    {
+                        editText_requestform_studentid.setError("This field can't be empty");
+                    }
 
+                    if(editText_requestform_passportnumber.getText().toString().trim().length() == 0)
+                    {
+                        editText_requestform_passportnumber.setError("This field can't be empty");
+                    }
+
+                    if(editText_requestform_phonenumber.getText().toString().trim().length() == 0)
+                    {
+                        editText_requestform_phonenumber.setError("This field can't be empty");
+                    }
+
+                    if(editText_requestform_emailaddress.getText().toString().trim().length() == 0)
+                    {
+                        editText_requestform_emailaddress.setError("This field can't be empty");
+                    }
+
+                    if(editText_requestform_homeaddress.getText().toString().trim().length() == 0)
+                    {
+                        editText_requestform_homeaddress.setError("This field can't be empty");
+                    }
+
+                    if (!editText_requestform_emailaddress.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
+                    {
+                        editText_requestform_emailaddress.setError("This email is not valid");
+                    }
+
+                    if (spinner_requestform_nationality.getSelectedItem().equals(""))
+                    {
+                        Toast.makeText(getContext(), "You must set your nationality", Toast.LENGTH_LONG).show();
+                    }
+
+                    if (requestAux.isEmpty())
+                    {
+                        spinner.setError("This email is not valid");
+                    }
+
+                    if(!requestAux.isEmpty()
+                            && !spinner_requestform_nationality.getSelectedItem().toString().trim().equals("")
+                            && editText_requestform_homeaddress.getText().toString().trim().length() != 0
+                            && editText_requestform_phonenumber.getText().toString().trim().length() != 0
+                            && editText_requestform_passportnumber.getText().toString().trim().length() != 0
+                            && editText_requestform_studentid.getText().toString().trim().length() != 0
+                            && editText_requestform_emailaddress.getText().toString().trim().length() != 0
+                            && editText_requestform_emailaddress.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+")
+                            && editText_requestform_name.getText().toString().trim().length() != 0)
+                    {
                         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
                         {
                             @Override
@@ -434,7 +493,7 @@ public class FragmentRequestForm extends Fragment
                                 switch (which)
                                 {
                                     case DialogInterface.BUTTON_POSITIVE:
-                                        //postNewComment(getContext(), getLayoutInflater());
+                                        postNewComment(getContext(), getLayoutInflater());
                                         break;
 
                                     case DialogInterface.BUTTON_NEGATIVE:
@@ -448,7 +507,12 @@ public class FragmentRequestForm extends Fragment
                         builder.setMessage("Are you sure you want to send this request?").setPositiveButton("Yes", dialogClickListener)
                                 .setNegativeButton("No", dialogClickListener).show();
                     }
-
+                }
+                catch (NullPointerException e)
+                {
+                    Toast.makeText(getContext(), "You must set your nationality", Toast.LENGTH_LONG).show();
+                }
+            }
         });
 
         //endregion
@@ -557,7 +621,7 @@ public class FragmentRequestForm extends Fragment
             public void onResponse(String response)
             {
                 new ToastCustomized().setInfoToast(layoutInflater, context,
-                        "Thank you for your enquiry. We'll get back to you soon as possible");
+                        "Thank you for your request. We'll get back to you soon as possible");
 
                 clearForm();
 
@@ -576,8 +640,35 @@ public class FragmentRequestForm extends Fragment
             protected Map<String,String> getParams()
             {
                 Map<String,String> params = new HashMap<String, String>();
-                ///params.put("firstName", editText_FirstName.getText().toString());
 
+                if(editText_requestform_courseenddate.getText().toString().trim().length() != 0)
+                {
+                    params.put("courseEndDate", editText_requestform_courseenddate.getText().toString());
+                }
+
+                params.put("studentBirthDate", editText_requestform_birthdate.getText().toString());
+                params.put("studentCode", editText_requestform_studentid.getText().toString());
+                params.put("studentEmail", editText_requestform_emailaddress.getText().toString());
+                params.put("studentHomeAddress", editText_requestform_homeaddress.getText().toString());
+                params.put("studentName", editText_requestform_name.getText().toString());
+                params.put("studentNationality", spinner_requestform_nationality.getSelectedItem().toString());
+
+                if(editText_requestform_notes.getText().toString().trim().length() != 0)
+                {
+                    params.put("studentNotes", editText_requestform_notes.getText().toString());
+                }
+
+                params.put("studentPassportNumber", editText_requestform_passportnumber.getText().toString());
+                params.put("studentPhone", editText_requestform_phonenumber.getText().toString());
+
+                String request = "";
+
+                for (int i = 0; i < requestAux.size(); i++)
+                {
+                    request += requestAux.get(i) + ", ";
+                }
+
+                params.put("subject", request);
 
                 return params;
             }

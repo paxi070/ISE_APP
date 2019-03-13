@@ -174,19 +174,22 @@ public class FragmentMenuContact extends Fragment
                 {
                     editText_FirstName.setError("This field can't be empty");
                 }
-                else if(editText_emailAddress.getText().toString().trim().length() == 0)
+                if(editText_emailAddress.getText().toString().trim().length() == 0)
                 {
                     editText_emailAddress.setError("This field can't be empty");
                 }
-                else if (!editText_emailAddress.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
+                if (!editText_emailAddress.getText().toString().matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
                 {
                     editText_emailAddress.setError("This email is not valid");
                 }
-                else if(editText_message.getText().toString().trim().length() == 0)
+                if(editText_message.getText().toString().trim().length() == 0)
                 {
                     editText_message.setError("This field can't be empty");
                 }
-                else
+                if(editText_FirstName.getText().toString().trim().length() != 0
+                    && editText_emailAddress.getText().toString().trim().length() != 0
+                    && editText_message.getText().toString().trim().length() != 0
+                    && !spinner_nationality.getSelectedItem().toString().trim().equals(""))
                 {
                     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
                     {
