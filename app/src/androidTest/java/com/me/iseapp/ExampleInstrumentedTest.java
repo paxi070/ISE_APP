@@ -1,4 +1,4 @@
-package com.example.iseapp;
+package com.me.iseapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

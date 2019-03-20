@@ -1,4 +1,4 @@
-package com.example.iseapp.Models;
+package com.me.iseapp.Models;
 
 public class Course
 {

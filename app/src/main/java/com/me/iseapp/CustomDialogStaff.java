@@ -1,4 +1,4 @@
-package com.example.iseapp;
+package com.me.iseapp;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -8,7 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.iseapp.Models.Staff;
+import com.me.iseapp.Models.Staff;
 
 public class CustomDialogStaff extends Dialog implements android.view.View.OnClickListener
 {

@@ -1,4 +1,4 @@
-package com.example.iseapp.FragmentsMenu;
+package com.me.iseapp.FragmentsMenu;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -17,44 +17,43 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.iseapp.Models.Course;
-import com.example.iseapp.Models.News;
-import com.example.iseapp.R;
-import com.example.iseapp.Recyclers.CourseAdapter;
-import com.example.iseapp.Recyclers.NewsAdapter;
+import com.me.iseapp.Models.Event;
+import com.me.iseapp.R;
+import com.me.iseapp.Recyclers.SocialAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-public class FragmentMenuNews extends Fragment
+public class FragmentMenuSocial extends Fragment
 {
-    private static final String url = "http://iseireland.ie/api/v1/news/all";
-
     private RecyclerView mList;
-
     private LinearLayoutManager linearLayoutManager;
     private DividerItemDecoration dividerItemDecoration;
-    private List<News> newsList;
+    private List<Event> eventList;
     private RecyclerView.Adapter adapter;
 
     RequestQueue rq;
-    //String url = "http://iseireland.ie/api/v1/news/all";
+    String url = "http://iseireland.ie/api/v1/event/all";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_menu_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_menu_social, container, false);
 
         rq = Volley.newRequestQueue(getContext());
 
-        mList = view.findViewById(R.id.recyclerview_news);
+        mList = view.findViewById(R.id.recyclerview_social);
 
-        newsList = new ArrayList<>();
-        adapter = new NewsAdapter(getContext(), newsList);
+        eventList = new ArrayList<>();
+        adapter = new SocialAdapter(getContext(), eventList);
 
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -88,15 +87,36 @@ public class FragmentMenuNews extends Fragment
 
                             for (int i = 0; i < dataset.length(); i++)
                             {
-                                JSONObject news = dataset.getJSONObject(i);
+                                JSONObject event = dataset.getJSONObject(i);
 
-                                News news1 = new News();
-                                news1.setShortDesc(news.getString("shortDesc"));
-                                news1.setDescription(news.getString("description"));
-                                news1.setThumbnailPath(news.getString("thumbnailPath"));
-                                news1.setImagePath(news.getString("imagePath"));
+                                String year = event.getString("dateTime").substring(0, 4);
+                                String month = event.getString("dateTime").substring(5, 7);
+                                String day = event.getString("dateTime").substring(8, 10);
 
-                                newsList.add(news1);
+                                String fecha = day + "/" + month + "/" + year;
+
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+                                String str1 = fecha;
+                                Date selectedDate = sdf.parse(str1);
+
+                                Calendar c = Calendar.getInstance();
+                                String formattedDate = sdf.format(c.getTime());
+
+                                Date currentDate = sdf.parse(formattedDate);
+
+                                if (selectedDate.compareTo(currentDate) > 0)
+                                {
+                                    Event event1 = new Event();
+                                    event1.setTitle(event.getString("title"));
+                                    event1.setPhoto(event.getString("photo"));
+                                    event1.setDescription(event.getString("description"));
+                                    event1.setPlace(event.getString("place"));
+                                    event1.setStartTime(event.getString("startTime"));
+                                    event1.setDateTime(event.getString("dateTime"));
+
+                                    eventList.add(event1);
+                                }
                             }
 
                             adapter.notifyDataSetChanged();
@@ -106,6 +126,8 @@ public class FragmentMenuNews extends Fragment
                         {
                             e.printStackTrace();
                             progressDialog.dismiss();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
                     }
                 },

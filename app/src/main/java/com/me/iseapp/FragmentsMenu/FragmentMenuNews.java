@@ -1,18 +1,15 @@
-package com.example.iseapp.FragmentsMenu;
+package com.me.iseapp.FragmentsMenu;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,9 +17,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.iseapp.Models.Staff;
-import com.example.iseapp.R;
-import com.example.iseapp.Recyclers.StaffAdapter;
+import com.me.iseapp.Models.News;
+import com.me.iseapp.R;
+import com.me.iseapp.Recyclers.NewsAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,28 +28,31 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentMenuStaff extends Fragment
+public class FragmentMenuNews extends Fragment
 {
+    private static final String url = "http://iseireland.ie/api/v1/news/all";
+
     private RecyclerView mList;
 
     private LinearLayoutManager linearLayoutManager;
-    private List<Staff> staffList;
+    private DividerItemDecoration dividerItemDecoration;
+    private List<News> newsList;
     private RecyclerView.Adapter adapter;
 
     RequestQueue rq;
-    String url = "http://iseireland.ie/api/v1/employee/all";
+    //String url = "http://iseireland.ie/api/v1/news/all";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_menu_staff, container, false);
+        View view = inflater.inflate(R.layout.fragment_menu_news, container, false);
 
         rq = Volley.newRequestQueue(getContext());
 
-        mList = view.findViewById(R.id.recyclerview_staff);
-        staffList = new ArrayList<>();
+        mList = view.findViewById(R.id.recyclerview_news);
 
-        adapter = new StaffAdapter(getContext(), staffList, getActivity());
+        newsList = new ArrayList<>();
+        adapter = new NewsAdapter(getContext(), newsList);
 
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -85,16 +86,15 @@ public class FragmentMenuStaff extends Fragment
 
                             for (int i = 0; i < dataset.length(); i++)
                             {
-                                JSONObject staff = dataset.getJSONObject(i);
+                                JSONObject news = dataset.getJSONObject(i);
 
-                                Staff staff1 = new Staff();
-                                staff1.setName(staff.getString("name"));
-                                staff1.setDesignation(staff.getString("designation"));
-                                staff1.setDescription(staff.getString("description"));
-                                staff1.setEmail(staff.getString("email"));
-                                staff1.setPhotoURL(staff.getString("photoUrl"));
+                                News news1 = new News();
+                                news1.setShortDesc(news.getString("shortDesc"));
+                                news1.setDescription(news.getString("description"));
+                                news1.setThumbnailPath(news.getString("thumbnailPath"));
+                                news1.setImagePath(news.getString("imagePath"));
 
-                                staffList.add(staff1);
+                                newsList.add(news1);
                             }
 
                             adapter.notifyDataSetChanged();

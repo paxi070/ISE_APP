@@ -1,4 +1,4 @@
-package com.example.iseapp.FragmentsMenu;
+package com.me.iseapp.FragmentsMenu;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -7,14 +7,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -29,17 +26,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.iseapp.R;
-import com.example.iseapp.ToastCustomized;
+import com.me.iseapp.R;
+import com.me.iseapp.ToastCustomized;
 import com.thomashaertel.widget.MultiSpinner;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FragmentRequestForm extends Fragment

@@ -1,9 +1,8 @@
-package com.example.iseapp.FragmentsMenu;
+package com.me.iseapp.FragmentsMenu;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,45 +16,38 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.iseapp.Models.Course;
-import com.example.iseapp.Models.Event;
-import com.example.iseapp.R;
-import com.example.iseapp.Recyclers.CourseAdapter;
-import com.example.iseapp.Recyclers.SocialAdapter;
-
+import com.me.iseapp.Models.Staff;
+import com.me.iseapp.R;
+import com.me.iseapp.Recyclers.StaffAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-public class FragmentMenuSocial extends Fragment
+public class FragmentMenuStaff extends Fragment
 {
     private RecyclerView mList;
+
     private LinearLayoutManager linearLayoutManager;
-    private DividerItemDecoration dividerItemDecoration;
-    private List<Event> eventList;
+    private List<Staff> staffList;
     private RecyclerView.Adapter adapter;
 
     RequestQueue rq;
-    String url = "http://iseireland.ie/api/v1/event/all";
+    String url = "http://iseireland.ie/api/v1/employee/all";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_menu_social, container, false);
+        View view = inflater.inflate(R.layout.fragment_menu_staff, container, false);
 
         rq = Volley.newRequestQueue(getContext());
 
-        mList = view.findViewById(R.id.recyclerview_social);
+        mList = view.findViewById(R.id.recyclerview_staff);
+        staffList = new ArrayList<>();
 
-        eventList = new ArrayList<>();
-        adapter = new SocialAdapter(getContext(), eventList);
+        adapter = new StaffAdapter(getContext(), staffList, getActivity());
 
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -89,36 +81,16 @@ public class FragmentMenuSocial extends Fragment
 
                             for (int i = 0; i < dataset.length(); i++)
                             {
-                                JSONObject event = dataset.getJSONObject(i);
+                                JSONObject staff = dataset.getJSONObject(i);
 
-                                String year = event.getString("dateTime").substring(0, 4);
-                                String month = event.getString("dateTime").substring(5, 7);
-                                String day = event.getString("dateTime").substring(8, 10);
+                                Staff staff1 = new Staff();
+                                staff1.setName(staff.getString("name"));
+                                staff1.setDesignation(staff.getString("designation"));
+                                staff1.setDescription(staff.getString("description"));
+                                staff1.setEmail(staff.getString("email"));
+                                staff1.setPhotoURL(staff.getString("photoUrl"));
 
-                                String fecha = day + "/" + month + "/" + year;
-
-                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-                                String str1 = fecha;
-                                Date selectedDate = sdf.parse(str1);
-
-                                Calendar c = Calendar.getInstance();
-                                String formattedDate = sdf.format(c.getTime());
-
-                                Date currentDate = sdf.parse(formattedDate);
-
-                                if (selectedDate.compareTo(currentDate) > 0)
-                                {
-                                    Event event1 = new Event();
-                                    event1.setTitle(event.getString("title"));
-                                    event1.setPhoto(event.getString("photo"));
-                                    event1.setDescription(event.getString("description"));
-                                    event1.setPlace(event.getString("place"));
-                                    event1.setStartTime(event.getString("startTime"));
-                                    event1.setDateTime(event.getString("dateTime"));
-
-                                    eventList.add(event1);
-                                }
+                                staffList.add(staff1);
                             }
 
                             adapter.notifyDataSetChanged();
@@ -128,8 +100,6 @@ public class FragmentMenuSocial extends Fragment
                         {
                             e.printStackTrace();
                             progressDialog.dismiss();
-                        } catch (ParseException e) {
-                            e.printStackTrace();
                         }
                     }
                 },

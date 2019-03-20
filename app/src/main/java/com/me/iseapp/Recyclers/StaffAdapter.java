@@ -1,8 +1,6 @@
-package com.example.iseapp.Recyclers;
+package com.me.iseapp.Recyclers;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -10,12 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.iseapp.CustomDialogStaff;
-import com.example.iseapp.Models.Staff;
-import com.example.iseapp.R;
+import com.me.iseapp.CustomDialogStaff;
+import com.me.iseapp.Models.Staff;
+import com.me.iseapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

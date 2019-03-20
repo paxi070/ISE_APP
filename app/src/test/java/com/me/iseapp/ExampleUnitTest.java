@@ -1,4 +1,4 @@
-package com.example.iseapp;
+package com.me.iseapp;
 
 import org.junit.Test;
 

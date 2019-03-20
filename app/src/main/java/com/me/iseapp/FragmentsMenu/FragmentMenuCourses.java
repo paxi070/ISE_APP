@@ -1,4 +1,4 @@
-package com.example.iseapp.FragmentsMenu;
+package com.me.iseapp.FragmentsMenu;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -17,9 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.iseapp.Models.Course;
-import com.example.iseapp.R;
-import com.example.iseapp.Recyclers.CourseAdapter;
+import com.me.iseapp.Models.Course;
+import com.me.iseapp.R;
+import com.me.iseapp.Recyclers.CourseAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

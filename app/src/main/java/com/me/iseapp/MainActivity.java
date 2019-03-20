@@ -1,4 +1,4 @@
-package com.example.iseapp;
+package com.me.iseapp;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,14 +14,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.iseapp.FragmentsMenu.FragmentMenuAttendance;
-import com.example.iseapp.FragmentsMenu.FragmentMenuContact;
-import com.example.iseapp.FragmentsMenu.FragmentMenuCourses;
-import com.example.iseapp.FragmentsMenu.FragmentMenuNews;
-import com.example.iseapp.FragmentsMenu.FragmentMenuNewsLetter;
-import com.example.iseapp.FragmentsMenu.FragmentMenuSocial;
-import com.example.iseapp.FragmentsMenu.FragmentMenuStaff;
-import com.example.iseapp.FragmentsMenu.FragmentRequestForm;
+import com.me.iseapp.FragmentsMenu.FragmentMenuAttendance;
+import com.me.iseapp.FragmentsMenu.FragmentMenuContact;
+import com.me.iseapp.FragmentsMenu.FragmentMenuCourses;
+import com.me.iseapp.FragmentsMenu.FragmentMenuNews;
+import com.me.iseapp.FragmentsMenu.FragmentMenuNewsLetter;
+import com.me.iseapp.FragmentsMenu.FragmentMenuSocial;
+import com.me.iseapp.FragmentsMenu.FragmentMenuStaff;
+import com.me.iseapp.FragmentsMenu.FragmentRequestForm;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {

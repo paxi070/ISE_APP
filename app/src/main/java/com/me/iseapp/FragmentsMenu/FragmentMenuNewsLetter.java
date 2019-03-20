@@ -1,4 +1,4 @@
-package com.example.iseapp.FragmentsMenu;
+package com.me.iseapp.FragmentsMenu;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,14 +18,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.iseapp.R;
-import com.example.iseapp.ToastCustomized;
+import com.me.iseapp.R;
+import com.me.iseapp.ToastCustomized;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.example.iseapp.FragmentsMenu.FragmentMenuContact.editText_FirstName;
-import static com.example.iseapp.FragmentsMenu.FragmentMenuContact.editText_emailAddress;
 
 public class FragmentMenuNewsLetter extends Fragment
 {
