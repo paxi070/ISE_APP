@@ -1,6 +1,8 @@
 package com.me.iseapp.FragmentsMenu;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,8 +20,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.me.iseapp.Activities.ActivitySeeNew;
+import com.me.iseapp.Activities.ActivitySeeSocial;
 import com.me.iseapp.Models.Event;
 import com.me.iseapp.R;
+import com.me.iseapp.Recyclers.NewsAdapter;
 import com.me.iseapp.Recyclers.SocialAdapter;
 
 import org.json.JSONArray;
@@ -38,7 +44,7 @@ public class FragmentMenuSocial extends Fragment
     private LinearLayoutManager linearLayoutManager;
     private DividerItemDecoration dividerItemDecoration;
     private List<Event> eventList;
-    private RecyclerView.Adapter adapter;
+    private SocialAdapter adapter;
 
     RequestQueue rq;
     String url = "http://iseireland.ie/api/v1/event/all";
@@ -62,6 +68,24 @@ public class FragmentMenuSocial extends Fragment
         mList.setLayoutManager(linearLayoutManager);
         //mList.addItemDecoration(dividerItemDecoration);
         mList.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(int position)
+            {
+                Context context = getContext();
+                Intent intent = new Intent(context, ActivitySeeSocial.class);
+                intent.putExtra("data_social_datetime", eventList.get(position).getDateTime());
+                intent.putExtra("data_social_description", eventList.get(position).getDescription());
+                intent.putExtra("data_social_photo", eventList.get(position).getPhoto());
+                intent.putExtra("data_social_place", eventList.get(position).getPlace());
+                intent.putExtra("data_social_starttime", eventList.get(position).getStartTime());
+                intent.putExtra("data_social_tittle", eventList.get(position).getTitle());
+                context.startActivity(intent);
+            }
+        });
+
 
         getData();
 

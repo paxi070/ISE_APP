@@ -17,6 +17,17 @@ import java.util.List;
 
 public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.ViewHolder>
 {
+    private NewsAdapter.OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener
+    {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(NewsAdapter.OnItemClickListener onItemClickListener)
+    {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     private Context context;
     private List<Event> list;
@@ -32,7 +43,7 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(context).inflate(R.layout.recylcerview_social_line, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, onItemClickListener);
     }
 
     @Override
@@ -73,7 +84,7 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.ViewHolder
 
         public ImageView imageView_social_photo;
 
-        public ViewHolder(View view)
+        public ViewHolder(View view, final NewsAdapter.OnItemClickListener onItemClickListener)
         {
             super(view);
             imageView_social_photo      = (ImageView) view.findViewById(R.id.imageView_social_photo);
@@ -82,6 +93,23 @@ public class SocialAdapter extends RecyclerView.Adapter<SocialAdapter.ViewHolder
             textview_social_place       = (TextView) view.findViewById(R.id.textview_social_place);
             textview_social_starttime   = (TextView) view.findViewById(R.id.textview_social_starttime);
             textview_social_datetime    = (TextView) view.findViewById(R.id.textview_social_datetime);
+
+            view.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    if(onItemClickListener != null)
+                    {
+                        int position = getAdapterPosition();
+
+                        if(position != RecyclerView.NO_POSITION)
+                        {
+                            onItemClickListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

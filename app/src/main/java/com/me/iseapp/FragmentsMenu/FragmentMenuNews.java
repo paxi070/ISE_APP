@@ -1,6 +1,8 @@
 package com.me.iseapp.FragmentsMenu;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.me.iseapp.Activities.ActivitySeeNew;
 import com.me.iseapp.Models.News;
 import com.me.iseapp.R;
 import com.me.iseapp.Recyclers.NewsAdapter;
@@ -37,7 +41,7 @@ public class FragmentMenuNews extends Fragment
     private LinearLayoutManager linearLayoutManager;
     private DividerItemDecoration dividerItemDecoration;
     private List<News> newsList;
-    private RecyclerView.Adapter adapter;
+    private NewsAdapter adapter;
 
     RequestQueue rq;
     //String url = "http://iseireland.ie/api/v1/news/all";
@@ -61,6 +65,21 @@ public class FragmentMenuNews extends Fragment
         mList.setLayoutManager(linearLayoutManager);
         //mList.addItemDecoration(dividerItemDecoration);
         mList.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(int position)
+            {
+                Context context = getContext();
+                Intent intent = new Intent(context, ActivitySeeNew.class);
+                intent.putExtra("data_news_shortDesc", newsList.get(position).getShortDesc());
+                intent.putExtra("data_news_description", newsList.get(position).getDescription());
+                intent.putExtra("data_news_thumbnailPath", newsList.get(position).getThumbnailPath());
+                intent.putExtra("data_news_imagePath", newsList.get(position).getImagePath());
+                context.startActivity(intent);
+            }
+        });
 
         getData();
 
